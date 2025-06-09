@@ -1,0 +1,73 @@
+.yellow {
+    color: rgb(255, 196, 0);
+}
+
+.text {
+    text-align: justify;
+}
+
+.text--img {
+    font-size: 13px;
+    text-align: justify;
+    width: 400px;
+}
+
+.lexique {
+    display: flex;
+    flex-direction: column;
+}
+
+.lexique--text {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    font-size: 14px;
+    font-style: italic;
+}
+
+.title {
+    display: flex;
+    justify-content: center;
+    font-size: 25px;
+}
+
+.italic {
+    font-style: italic;
+}
+
+.center {
+    display: flex;
+    justify-content: center;
+}
+
+i {
+    color: aqua;
+}
+
+.img--container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.img {
+    width: 720px;
+    height: 450px;
+}
+
+.img--container2 {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.img2 {
+    width: 250px;
+    height: 300px;
+}
+
+.caca {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}

@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Le Sound Design d’Overwatch - Faby Erwann</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background: #121212;
+            color: #f0f0f0;
+        }
+
+        header {
+            background-color: #1f1f1f;
+            padding: 1em;
+            text-align: center;
+            border-bottom: 2px solid #444;
+        }
+
+        nav {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 1em;
+            background-color: #2b2b2b;
+            padding: 0.5em;
+        }
+
+        nav a {
+            color: #f0f0f0;
+            text-decoration: none;
+            padding: 0.5em 1em;
+            border-radius: 5px;
+            background-color: #3a3a3a;
+        }
+
+        nav a:hover {
+            background-color: #555;
+        }
+
+        section {
+            padding: 2em;
+            max-width: 800px;
+            margin: auto;
+        }
+
+        footer {
+            text-align: center;
+            background-color: #1f1f1f;
+            padding: 1em;
+            color: #888;
+            border-top: 1px solid #444;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <h1>Le Sound Design d’Overwatch</h1>
+        <p>–</p>
+        <h3> Problématique : Quelle est l’importance du sound design dans les jeux vidéo
+            compétitifs comme Overwatch ?</h3>
+        <br>
+    </header>
+
+    <nav>
+        <a href="accueil.html">Introduction</a>
+        <a href="chapitre1.html">Chapitre 1</a>
+        <a href="chapitre2.html">Chapitre 2</a>
+        <a href="chapitre3.html">Chapitre 3</a>
+        <a href="chapitre4.html">Chapitre 4</a>
+        <a href="chapitre5.html" class="yellow"><b>Chapitre 5</b></a>
+        <a href="chapitre6.html">Chapitre 6</a>
+        <a href="conclusion.html">Conclusion</a>
+        <a href="sitographie.html">Sitographie</a>
+    </nav>
+
+    <section>
+        <div class="title">
+            <h1><u>Partie 2 : Le mixage</u></h1>
+        </div>
+        <br>
+        <h2><u>Chapitre 5 - La dynamique sonore :</u></h2>
+        <br>
+        <p class="text">Afin d’offrir la meilleure expérience de jeu possible, les développeurs ont cherché plusieurs solutions pour
+            mieux guider les joueurs grâce au son, notamment en travaillant sur la dynamique sonore. Lors de la
+            conférence Wwise Tour, on apprend que dans un premier temps, ils ont envisagé d’utiliser les principes
+            d’obstruction et d’occlusion.
+
+            L’obstruction se définit par la présence d’un objet bloquant partiellement le champ de vision — ou dans ce
+            cas, d’écoute. Par exemple, si une personne passe derrière des caisses, le son de ses pas sera légèrement
+            atténué car les caisses obstruent la propagation du son. L’occlusion, elle, repose sur un principe
+            d’isolation : une personne située dans une autre pièce verra ses bruits atténués par les murs qui
+            l’entourent.
+
+            Cependant, en n’utilisant que ce système — dans une version initialement très simplifiée — plusieurs
+            problèmes sont apparus. Il devenait difficile pour le joueur de localiser précisément ses ennemis. Par
+            exemple, il était compliqué de distinguer un ennemi caché derrière un mur de celui dissimulé derrière une
+            simple caisse ou un panier. Pourtant, cette distinction est cruciale : savoir si un ennemi est juste
+            derrière un poteau et peut attaquer à tout moment, ou s’il est derrière un mur qu’il devra contourner,
+            change radicalement l’approche du joueur. Pouvoir faire cette distinction améliore donc la lisibilité et
+            l’adaptation stratégique du joueur.
+            <br><br><br><br>
+            Pour résoudre ces problèmes, les développeurs ont utilisé le système de raycast afin de calculer le chemin
+            réel que le son doit parcourir — qu’ils appellent le path diversion (que l’on pourrait traduire par « détour
+            »). Le jeu mesure la longueur de ce chemin et en déduit un pourcentage d’occlusion. Par exemple, si le
+            chemin réel est 6 mètres plus long qu’en ligne droite (à travers le mur), cela correspond à 30 %
+            d’occlusion. Si le détour atteint 40 mètres, l’occlusion est de 100 %, et le son est alors complètement
+            bloqué.
+
+            Avec ces données, ils ont tenté d’utiliser le système d’obstruction et d’occlusion de Wwise, mais celui-ci
+            ne permettait pas de régler individuellement les paramètres selon le type de son (pas, tirs, etc.). Pour
+            pallier cela, ils ont eu recours aux RTPCs (Real-Time Parameter Controls). Grâce à cette fonctionnalité, ils
+            ont pu ajuster différents paramètres pour chaque groupe de sons en fonction du pourcentage d’occlusion
+            calculé.
+
+            Des paramètres comme le low-pass, le high-pass et le volume étaient également modifiables via Wwise, mais
+            l’usage des RTPCs a surtout été utile pour contrôler d’autres aspects, notamment l’envoi vers des
+            auxiliaires comme la reverb. 
+            <br><br><br><br>
+            Un problème est toutefois apparu au niveau des low-pass. Scott Lawlor donne
+            l’exemple des bruits de pas sur un tapis. Pour simuler ce son plus étouffé, ils appliquaient plusieurs
+            low-pass aux sons de pas de base. Mais lorsqu’un personnage marchait sur un tapis tout en étant derrière un
+            mur, les low-pass s’additionnaient, provoquant une atténuation excessive — les bruits de pas devenaient à
+            peine audibles, voire inaudibles, ce qui nuisait au gameplay. En effet, le joueur entendait son ennemi trop
+            tard, ce qui réduisait son temps de réaction.
+
+            Pour corriger cela, ils ont appliqué des égaliseurs en temps réel sur les bruits de pas, afin de neutraliser
+            l’addition des low-pass. Ce système permet au joueur de mieux percevoir quand un personnage entre dans la
+            pièce, et rend l’écoute plus naturelle.
+
+            Comparé à Counter-Strike, on remarque une différence importante : dans CS, on entend la direction des
+            ennemis, mais il n’y a ni obstruction ni occlusion. Ainsi, un ennemi derrière un mur sonne comme s’il était
+            juste à côté. La seule façon de deviner s’il y a un obstacle est de connaître le matériau du sol, car chaque
+            type produit un son distinct. Dans CS, cela reste pertinent, car il est possible de tirer à travers
+            certaines surfaces.
+
+            En revanche, dans Overwatch, les balles ne traversent pas les murs. Il est donc rassurant pour le joueur de
+            savoir que les ennemis sont dans une autre pièce, ce qui lui permet de se concentrer sur ceux qui sont
+            réellement menaçants. Tous les sons produits par les autres joueurs sont affectés par ces valeurs
+            d’occlusion, sauf les voice lines des capacités ultimes. Il est crucial que le joueur perçoive clairement
+            ces voix, car elles annoncent des menaces ou des opportunités stratégiques (selon qu’elles viennent d’un
+            ennemi ou d’un allié), et permettent de réagir en conséquence : se cacher ou contre-attaquer.
+            <br><br><br><br>
+            Concernant les délais et les reverbs, ils ont utilisé un plugin qui récupère les distances selon quatre
+            angles. Ces données sont envoyées dans deux versions différentes : l’une pour les sons puissants (comme les
+            tirs), l’autre pour les sons plus discrets (comme les pas). Cela permet d’avoir des échos adaptés à la
+            puissance des sons.
+
+            Les distances mesurées sont ensuite utilisées pour moduler divers paramètres en temps réel : délais, volume,
+            low-pass, high-pass, etc. On peut ainsi entendre plusieurs réflexions en simultané — par exemple, celle d’un
+            mur proche, plus claire et directe, et celle d’un mur plus éloigné, plus grave et décalée. Cela ajoute à la
+            fois de la clarté et du réalisme. Grâce à ce système, chaque tir ou explosion a plus d’impact sonore et
+            contribue à une immersion plus forte.
+
+        </p>
+    </section>
+
+    <footer>
+        <p>&copy; 2024/2025 - Faby Erwann | Mémoire ISTS 3</p>
+    </footer>
+</body>
+
+</html>
